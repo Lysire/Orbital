@@ -1,11 +1,8 @@
 import React from 'react';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CATEGORIES, CLOTHES } from '../../data/dummy-data';
 import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
 import ClothesList from '../../components/Lists/ClothesList';
-import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
-
 
 /*
  * Screen that displays clothing under a certain

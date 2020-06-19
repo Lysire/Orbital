@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux'; // to obtain slice of state (from events reducer)
 
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton'
-import { CATEGORIES } from '../../data/dummy-data';
 import GridTile from '../../components/Tiles/GridTile';
 import LogicButtons from '../../components/Buttons/LogicButtons';
 
@@ -13,6 +13,10 @@ import LogicButtons from '../../components/Buttons/LogicButtons';
  */
 
 const CategoriesScreen = props => {
+
+  // accesses store, obtains the reducer through state.categories, then gets the availableCategories
+  const availableCategories = useSelector(state => state.categories.availableCategories);
+
   const renderGridItem = itemData => {
     return (
       <GridTile
@@ -34,7 +38,7 @@ const CategoriesScreen = props => {
     <FlatList
       keyExtractor={(item, index) => item.id}
       numColumns={2}
-      data={CATEGORIES}
+      data={availableCategories}
       renderItem={renderGridItem}
     />
   );

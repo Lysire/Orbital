@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
-import { EVENTS } from '../../data/dummy-data';
 import GridTile from '../../components/Tiles/GridTile';
 import LogicButtons from '../../components/Buttons/LogicButtons';
 
@@ -13,6 +13,9 @@ import LogicButtons from '../../components/Buttons/LogicButtons';
  */
 
 const EventsScreen = props => {
+
+  const availableEvents = useSelector(state => state.events.availableEvents);
+
   const renderGriditem = itemData => {
     return (
       <GridTile
@@ -34,7 +37,7 @@ const EventsScreen = props => {
     <FlatList
       keyExtractor={(item, index) => item.id}
       numColumns={2}
-      data={EVENTS}
+      data={availableEvents}
       renderItem={renderGriditem}
     />
   );
@@ -43,7 +46,7 @@ const EventsScreen = props => {
 EventsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Events',
-    headerLeft: () => (
+    headerLeft: () => ( // may consider factoring this out into a custom button component
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Menu"

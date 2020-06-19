@@ -6,7 +6,7 @@ import { HeaderButtons, OverflowMenu, HiddenItem, Item } from 'react-navigation-
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CustomHeaderButton from './CustomHeaderButton';
 
-const LogicButtons = props => (
+const LogicButtons = props => ( // use of {props.children} to reuse code
     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
             title="Add"
@@ -17,6 +17,7 @@ const LogicButtons = props => (
             <HiddenItem title="Edit" onPress={props.onEdit} />
             <HiddenItem title="Remove" onPress={props.onRemove} />
         </OverflowMenu>
+        {props.children} 
     </HeaderButtons>
 );
 

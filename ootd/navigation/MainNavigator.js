@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
@@ -21,6 +20,7 @@ const defaultStackNavOptions = {
   headerTitle: 'A Screen'
 };
 
+// navigator for navigating between clothes screens
 const ClothesNavigator = createStackNavigator(
   {
     Categories: {
@@ -36,6 +36,7 @@ const ClothesNavigator = createStackNavigator(
   }
 );
 
+// navigator for navigating between outfits screens
 const OutfitsNavigator = createStackNavigator(
   {
     Events: {
@@ -53,6 +54,7 @@ const OutfitsNavigator = createStackNavigator(
   }
 );
 
+// the main navigator encompassing both navigators
 const MainNavigator = createDrawerNavigator(
   {
     Clothes: {
