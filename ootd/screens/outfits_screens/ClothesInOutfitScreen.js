@@ -3,7 +3,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { OUTFITS, CLOTHES } from '../../data/dummy-data'
 import ClothesList from '../../components/ClothesList';
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 
 /*
  * Screen that displays clothing under a certain
@@ -11,7 +11,7 @@ import HeaderButton from '../../components/HeaderButton';
  */
 
 const ClothesInOutfitScreen = props => {
-  
+
   const catID = props.navigation.getParam('outfitID');
 
   const displayedClothes = CLOTHES.filter(
@@ -29,12 +29,19 @@ ClothesInOutfitScreen.navigationOptions = navData => {
   return {
     headerTitle: selectedOutfit.title,
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}
       >
         <Item
           title="Add or Remove"
           iconName="ios-brush"
           onPress={() => { }}
+        />
+        <Item
+          title="Home"
+          iconName="md-home"
+          onPress={() => {
+            navData.navigation.popToTop();
+          }}
         />
       </HeaderButtons>
     )

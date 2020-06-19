@@ -4,7 +4,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { EVENTS, OUTFITS } from '../../data/dummy-data';
 import GridTile from '../../components/GridTile';
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 
 /*
  * Screen that displays events
@@ -54,12 +54,23 @@ EventsOutfitsScreen.navigationOptions = navData => {
     return {
         headerTitle: selectedEvent.title,
         headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}
-            >
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title="Add"
+                    iconName="md-add"
+                    onPress={() => { }}
+                />
                 <Item
                     title="Add or Remove"
                     iconName="ios-brush"
                     onPress={() => { }}
+                />
+                <Item
+                    title="Home"
+                    iconName="md-home"
+                    onPress={() => {
+                        navData.navigation.popToTop();
+                    }}
                 />
             </HeaderButtons>
         )

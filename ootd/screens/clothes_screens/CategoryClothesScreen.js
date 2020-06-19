@@ -3,7 +3,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CATEGORIES, CLOTHES } from '../../data/dummy-data';
 import ClothesList from '../../components/ClothesList';
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 
 /*
  * Screen that displays clothing under a certain
@@ -11,7 +11,7 @@ import HeaderButton from '../../components/HeaderButton';
  */
 
 const CategoryClothesScreen = props => {
-  
+
   const catID = props.navigation.getParam('categoryID');
 
   const displayedClothes = CLOTHES.filter(
@@ -21,20 +21,31 @@ const CategoryClothesScreen = props => {
   return <ClothesList listData={displayedClothes} navigation={props.navigation} />;
 };
 
-CategoryClothesScreen.navigationOptions = navigationData => {
-  const catID = navigationData.navigation.getParam('categoryID'); // since headerTitle is dynamic, need to use a parameter to update
+CategoryClothesScreen.navigationOptions = navData => {
+  const catID = navData.navigation.getParam('categoryID'); // since headerTitle is dynamic, need to use a parameter to update
 
   const selectedCategory = CATEGORIES.find(cat => cat.id === catID);
 
   return {
     headerTitle: selectedCategory.title,
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}
-      >
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
-          title="Add or Remove"
+          title="Add"
+          iconName="md-add"
+          onPress={() => { }}
+        />
+        <Item
+          title="Edit or Remove"
           iconName="ios-brush"
           onPress={() => { }}
+        />
+        <Item
+          title="Home"
+          iconName="md-home"
+          onPress={() => {
+            navData.navigation.popToTop();
+          }}
         />
       </HeaderButtons>
     )

@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 import { CATEGORIES } from '../../data/dummy-data';
 import GridTile from '../../components/GridTile';
 
@@ -43,7 +43,7 @@ CategoriesScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Categories',
     headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton} // using custom header button component
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton} // using custom header button component
       >
         <Item
           title="Menu"
@@ -55,8 +55,12 @@ CategoriesScreen.navigationOptions = navData => {
       </HeaderButtons>
     ),
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}
-      >
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Add"
+          iconName="md-add"
+          onPress={() => { }}
+        />
         <Item
           title="Add or Remove"
           iconName="ios-brush"

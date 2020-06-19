@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 import { EVENTS } from '../../data/dummy-data';
 import GridTile from '../../components/GridTile';
 
@@ -24,7 +24,7 @@ const EventsScreen = props => {
               eventID: itemData.item.id
             }
           });
-        }} 
+        }}
       />
     );
   };
@@ -43,7 +43,7 @@ EventsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Events',
     headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Menu"
           iconName="md-menu"
@@ -52,16 +52,21 @@ EventsScreen.navigationOptions = navData => {
           }}
         />
       </HeaderButtons>
-      ),
-      headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Add or Remove"
-            iconName="ios-brush"
-            onPress={() => { }} // to add logic to this
-          />
-        </HeaderButtons>
-      )
+    ),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Add"
+          iconName="md-add"
+          onPress={() => { }}
+        />
+        <Item
+          title="Edit or Remove"
+          iconName="ios-brush"
+          onPress={() => { }} // to add logic to this
+        />
+      </HeaderButtons>
+    )
   };
 };
 

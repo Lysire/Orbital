@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CLOTHES } from '../../data/dummy-data';
-import HeaderButton from '../../components/HeaderButton';
+import CustomHeaderButton from '../../components/CustomHeaderButton';
 
 /*
  * Screen that displays details of the clothing selected
@@ -30,7 +30,7 @@ ClothesDetailScreen.navigationOptions = navData => {
   return {
     headerTitle: selectedClothes.title,
     headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Home"
           iconName="md-home"

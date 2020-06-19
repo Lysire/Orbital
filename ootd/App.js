@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { enableScreens } from 'react-native-screens';
 
-import ClothesNavigator from './navigation/ClothesNavigator';
+import MainNavigator from './navigation/MainNavigator';
 
 enableScreens();
 
@@ -26,5 +26,5 @@ export default function App() {
     );
   }
 
-  return <ClothesNavigator />;
+  return <MainNavigator />;
 }
