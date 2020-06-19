@@ -1,13 +1,12 @@
 import React from 'react';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { OUTFITS, CLOTHES } from '../../data/dummy-data'
-import ClothesList from '../../components/ClothesList';
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import ClothesList from '../../components/Lists/ClothesList';
+import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
 
 /*
  * Screen that displays clothing under a certain
- * chosen outfit, in a list
+ * chosen outfit, in a list (last screen)
  */
 
 const ClothesInOutfitScreen = props => {
@@ -28,23 +27,9 @@ ClothesInOutfitScreen.navigationOptions = navData => {
 
   return {
     headerTitle: selectedOutfit.title,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}
-      >
-        <Item
-          title="Add or Remove"
-          iconName="ios-brush"
-          onPress={() => { }}
-        />
-        <Item
-          title="Home"
-          iconName="md-home"
-          onPress={() => {
-            navData.navigation.popToTop();
-          }}
-        />
-      </HeaderButtons>
-    )
+    headerRight: () => (<LogicHomeButtons onAdd={() => { }} onEdit={() => { }}
+    onRemove={() => { }} onSelectHome={() => navData.navigation.popToTop()} />
+  )
   };
 };
 

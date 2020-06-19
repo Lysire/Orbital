@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 import { enableScreens } from 'react-native-screens';
 
 import MainNavigator from './navigation/MainNavigator';
@@ -26,5 +27,9 @@ export default function App() {
     );
   }
 
-  return <MainNavigator />;
+  return (
+    <OverflowMenuProvider>
+      <MainNavigator />
+    </OverflowMenuProvider>
+  );
 }

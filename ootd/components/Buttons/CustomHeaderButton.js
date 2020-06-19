@@ -1,12 +1,14 @@
 import React from 'react';
 import { HeaderButton } from 'react-navigation-header-buttons';
-import { Ionicons } from '@expo/vector-icons'; // to change this to MaterialCommunityIcons
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+// Reusable custom header button using material community icons icon pack
 
 const CustomHeaderButton = props => {
   return (
     <HeaderButton
       {...props}
-      IconComponent={Ionicons}
+      IconComponent={MaterialCommunityIcons}
       iconSize={20}
       color={'white'}
     />

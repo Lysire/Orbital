@@ -2,12 +2,14 @@ import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CATEGORIES, CLOTHES } from '../../data/dummy-data';
-import ClothesList from '../../components/ClothesList';
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
+import ClothesList from '../../components/Lists/ClothesList';
+import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
+
 
 /*
  * Screen that displays clothing under a certain
- * chosen category, in a list
+ * chosen category, in a list (2nd screen)
  */
 
 const CategoryClothesScreen = props => {
@@ -28,26 +30,8 @@ CategoryClothesScreen.navigationOptions = navData => {
 
   return {
     headerTitle: selectedCategory.title,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Add"
-          iconName="md-add"
-          onPress={() => { }}
-        />
-        <Item
-          title="Edit or Remove"
-          iconName="ios-brush"
-          onPress={() => { }}
-        />
-        <Item
-          title="Home"
-          iconName="md-home"
-          onPress={() => {
-            navData.navigation.popToTop();
-          }}
-        />
-      </HeaderButtons>
+    headerRight: () => (<LogicHomeButtons onAdd={() => { }} onEdit={() => { }}
+      onRemove={() => { }} onSelectHome={() => navData.navigation.popToTop()} />
     )
   };
 };

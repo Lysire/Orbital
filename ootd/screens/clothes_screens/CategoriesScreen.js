@@ -2,13 +2,14 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton'
 import { CATEGORIES } from '../../data/dummy-data';
-import GridTile from '../../components/GridTile';
+import GridTile from '../../components/Tiles/GridTile';
+import LogicButtons from '../../components/Buttons/LogicButtons';
 
 /*
  * Screen that displays categories of different clothes
- * in a 2 x 2 grid like fashion
+ * in a 2 x 2 grid like fashion (main screen for clothes)
  */
 
 const CategoriesScreen = props => {
@@ -47,27 +48,14 @@ CategoriesScreen.navigationOptions = navData => {
       >
         <Item
           title="Menu"
-          iconName="md-menu"
+          iconName="menu"
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
         />
       </HeaderButtons>
     ),
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Add"
-          iconName="md-add"
-          onPress={() => { }}
-        />
-        <Item
-          title="Add or Remove"
-          iconName="ios-brush"
-          onPress={() => { }}
-        />
-      </HeaderButtons>
-    )
+    headerRight: () => <LogicButtons onAdd={() => {}} onEdit={() => {}} onRemove={() => {}} />
   };
 };
 

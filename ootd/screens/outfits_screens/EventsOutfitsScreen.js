@@ -1,14 +1,13 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { EVENTS, OUTFITS } from '../../data/dummy-data';
-import GridTile from '../../components/GridTile';
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import GridTile from '../../components/Tiles/GridTile';
+import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
 
 /*
- * Screen that displays events
- * in a 2 x 2 grid like fashion
+ * Screen that displays outfits 
+ * in a 2 x 2 grid like fashion (2nd screen)
  */
 
 const EventsOutfitsScreen = props => {
@@ -16,7 +15,7 @@ const EventsOutfitsScreen = props => {
 
     const displayedOutfits = OUTFITS.filter(
         outfit => outfit.eventIDs.indexOf(catID) >= 0
-    ); // get clothes from a certain category ID
+    ); // get outfits from a certain eventID
 
     const renderGridItem = itemData => {
         return (
@@ -25,9 +24,9 @@ const EventsOutfitsScreen = props => {
                 color={'e5e5e5'}
                 onSelect={() => {
                     props.navigation.navigate({
-                        routeName: 'ClothesInOutfit',
+                        routeName: 'ClothesInOutfit', // navigate to ClothesInOutfitScreen
                         params: {
-                            outfitID: itemData.item.id
+                            outfitID: itemData.item.id 
                         }
                     });
                 }}
@@ -53,27 +52,9 @@ EventsOutfitsScreen.navigationOptions = navData => {
 
     return {
         headerTitle: selectedEvent.title,
-        headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-                <Item
-                    title="Add"
-                    iconName="md-add"
-                    onPress={() => { }}
-                />
-                <Item
-                    title="Add or Remove"
-                    iconName="ios-brush"
-                    onPress={() => { }}
-                />
-                <Item
-                    title="Home"
-                    iconName="md-home"
-                    onPress={() => {
-                        navData.navigation.popToTop();
-                    }}
-                />
-            </HeaderButtons>
-        )
+        headerRight: () => (<LogicHomeButtons onAdd={() => { }} onEdit={() => { }}
+        onRemove={() => { }} onSelectHome={() => navData.navigation.popToTop()} />
+      )
     };
 }
 

@@ -2,13 +2,14 @@ import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
 import { EVENTS } from '../../data/dummy-data';
-import GridTile from '../../components/GridTile';
+import GridTile from '../../components/Tiles/GridTile';
+import LogicButtons from '../../components/Buttons/LogicButtons';
 
 /*
  * Screen that displays events
- * in a 2 x 2 grid like fashion
+ * in a 2 x 2 grid like fashion (main screen for events)
  */
 
 const EventsScreen = props => {
@@ -46,27 +47,14 @@ EventsScreen.navigationOptions = navData => {
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Menu"
-          iconName="md-menu"
+          iconName="menu"
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
         />
       </HeaderButtons>
     ),
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Add"
-          iconName="md-add"
-          onPress={() => { }}
-        />
-        <Item
-          title="Edit or Remove"
-          iconName="ios-brush"
-          onPress={() => { }} // to add logic to this
-        />
-      </HeaderButtons>
-    )
+    headerRight: () => <LogicButtons onAdd={() => {}} onEdit={() => {}} onRemove={() => {}} />
   };
 };
 

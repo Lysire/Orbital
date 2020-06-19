@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 
-import ClothesItem from './ClothesItem';
+import ClothesItem from '../Tiles/ClothesItem';
 
 /*
  * Visual wrapper around FlatList to render

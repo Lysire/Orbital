@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CLOTHES } from '../../data/dummy-data';
-import CustomHeaderButton from '../../components/CustomHeaderButton';
+import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
 
 /*
  * Screen that displays details of the clothing selected
- * from the clothes under a particular category
+ * from the clothes under a particular category (last screen)
  */
 
 const ClothesDetailScreen = props => {
@@ -29,16 +28,8 @@ ClothesDetailScreen.navigationOptions = navData => {
   
   return {
     headerTitle: selectedClothes.title,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Home"
-          iconName="md-home"
-          onPress={() => {
-            navData.navigation.popToTop();
-          }}
-        />
-      </HeaderButtons>
+    headerRight: () => (<LogicHomeButtons onAdd={() => { }} onEdit={() => { }}
+      onRemove={() => { }} onSelectHome={() => navData.navigation.popToTop()} />
     )
   };
 };
