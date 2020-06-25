@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector } from 'react-redux';
 
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
 import GridTile from '../../components/Tiles/GridTile';
-import LogicButtons from '../../components/Buttons/LogicButtons';
 
 /*
  * Screen that displays events
@@ -15,6 +14,10 @@ import LogicButtons from '../../components/Buttons/LogicButtons';
 const EventsScreen = props => {
 
   const availableEvents = useSelector(state => state.events.availableEvents);
+
+  const addEventHandler = useCallback(() => {
+    props.navigation.navigate('EditEvents', {eventID: ''});
+  }, []);
 
   const renderGriditem = itemData => {
     return (
@@ -33,6 +36,8 @@ const EventsScreen = props => {
     );
   };
 
+  useEffect(() => props.navigation.setParams( { add: addEventHandler }), [addEventHandler]);
+
   return (
     <FlatList
       keyExtractor={(item, index) => item.id}
@@ -44,6 +49,8 @@ const EventsScreen = props => {
 };
 
 EventsScreen.navigationOptions = navData => {
+  const addEventHandler = navData.navigation.getParam('add');
+
   return {
     headerTitle: 'Events',
     headerLeft: () => ( // may consider factoring this out into a custom button component
@@ -57,7 +64,15 @@ EventsScreen.navigationOptions = navData => {
         />
       </HeaderButtons>
     ),
-    headerRight: () => <LogicButtons onAdd={() => {}} onEdit={() => {}} onRemove={() => {}} />
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Add"
+          iconName="plus"
+          onPress={addEventHandler}
+        />
+      </HeaderButtons>
+    )
   };
 };
 

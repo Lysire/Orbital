@@ -14,7 +14,7 @@ const GridTile = props => {
   }
   return (
     <View style={styles.gridItem}>
-      <TouchComp style={{ flex: 1 }} onPress={props.onSelect}>
+      <TouchComp style={{ flex: 1 }} onPress={props.onSelect} onLongPress={props.onLongSelect}>
         <View
           style={{ ...styles.titleContainer, ...{ backgroundColor: props.color } }}
         >

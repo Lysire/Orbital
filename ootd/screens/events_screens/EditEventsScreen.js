@@ -4,40 +4,39 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
-import * as categoriesActions from '../../store/actions/categories';
+import * as eventsActions from '../../store/actions/events';
 
 /*
- * Screen to add / edit existing categories and events
+ * Screen to add / edit existing events
  * TO-DO: Input validation for input fields
  */
 
 const EditCategoriesScreen = props => {
     const dispatch = useDispatch();
 
-    const categoryID = props.navigation.getParam('categoryID'); // get from CategoriesScreen
     const eventID = props.navigation.getParam('eventID'); // get from EventsScreen
 
-    // falseish value for add if categoryID is not set
-    const catToEdit = useSelector(state =>
-        state.categories.availableCategories.find(cat => cat.id === categoryID)); 
+    // falseish value for add if eventID is not set
+    const eventToEdit = useSelector(state =>
+        state.events.availableEvents.find(event => event.id === eventsID)); 
         
-    const isEdit = catToEdit ? true : false; 
-    const [title, setTitle] = useState(catToEdit ? catToEdit.title : '');
+    const isEdit = eventToEdit ? true : false; 
+    const [title, setTitle] = useState(eventToEdit ? eventToEdit.title : '');
 
     // following function handles submitting action, uses useCallBack to prevent infinite loop
 
     const submitHandler = useCallback(() => {
-        if (catToEdit) {
+        if (eventToEdit) {
             dispatch(
-                categoriesActions.updateCategory(categoryID, title)
+                eventsActions.updateEvent(eventID, title)
             );
         } else {
             dispatch(
-                categoriesActions.createCategory(title)
+                eventsActions.createEvent(title)
             );
         }
         props.navigation.goBack();
-    }, [dispatch, categoryID, title]);
+    }, [dispatch, eventID, title]);
 
     useEffect(() => {
         props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit });
@@ -64,8 +63,8 @@ EditCategoriesScreen.navigationOptions = navData => {
     const isEdit = navData.navigation.getParam('isEdit');
     return {
         headerTitle: isEdit
-            ? 'Edit Category'
-            : 'Add Category',
+            ? 'Edit Event'
+            : 'Add Event',
         headerRight: (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item

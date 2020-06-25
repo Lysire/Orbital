@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
@@ -7,16 +6,17 @@ import Colors from '../constants/Colors';
 import CategoriesScreen from '../screens/clothes_screens/CategoriesScreen';
 import CategoryClothesScreen from '../screens/clothes_screens/CategoryClothesScreen';
 import ClothesDetailScreen from '../screens/clothes_screens/ClothesDetailScreen';
-import EventsScreen from '../screens/outfits_screens/EventsScreen';
-import EventsOutfitsScreen from '../screens/outfits_screens/EventsOutfitsScreen';
-import ClothesInOutfitScreen from '../screens/outfits_screens/ClothesInOutfitScreen';
+import EditCategoriesScreen from '../screens/clothes_screens/EditCategoriesScreen';
+
+import EventsScreen from '../screens/events_screens/EventsScreen';
+import EventsClothesScreen from '../screens/events_screens/EventsClothesScreen';
 
 // default stack navigation options
 const defaultStackNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+    backgroundColor: Colors.primaryColor
   },
-  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+  headerTintColor: 'white',
   headerTitle: 'A Screen'
 };
 
@@ -29,7 +29,10 @@ const ClothesNavigator = createStackNavigator(
     ClothesCategories: {
       screen: CategoryClothesScreen
     },
-    ClothesDetail: ClothesDetailScreen
+    ClothesDetail: ClothesDetailScreen,
+    EditCategories: {
+      screen: EditCategoriesScreen
+    }
   },
   {
     defaultNavigationOptions: defaultStackNavOptions
@@ -43,10 +46,10 @@ const OutfitsNavigator = createStackNavigator(
       screen: EventsScreen
     },
     ClothesEvents: {
-      screen: EventsOutfitsScreen
+      screen: EventsClothesScreen
     },
-    ClothesInOutfit: {
-      screen: ClothesInOutfitScreen
+    EditEvents: {
+      screen: EditEventsScreen
     }
   },
   {

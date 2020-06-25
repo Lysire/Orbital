@@ -9,12 +9,12 @@
  */  
 
 class Outfits {
-    constructor(id, eventIDs, title, imageURL, desc) 
+    constructor(id, eventIDs, title, color, desc) 
     {
       this.id = id;
       this.eventIDs = eventIDs;
       this.title = title;
-      this.imageURL = imageURL;
+      this.color = color; // use color for min viable pdt
       this.desc = desc;
     }
   }
