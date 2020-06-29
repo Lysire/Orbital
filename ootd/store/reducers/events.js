@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
             };
         case UPDATE_EVENT:
             const eventIndex = state.availableEvents.findIndex(cat => cat.id === action.ID);
-            const updatedEvent = new Category(action.catID, action.newTitle, '#fb1d93');
+            const updatedEvent = new Category(action.ID, action.newTitle, '#fb1d93');
             const updatedEvents = [...state.availableEvents];
             updatedEvents[eventIndex] = updatedEvent;
             return {

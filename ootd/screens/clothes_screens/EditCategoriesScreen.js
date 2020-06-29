@@ -35,13 +35,13 @@ const EditCategoriesScreen = props => {
             );
         }
         props.navigation.goBack();
-    }, [dispatch, categoryID, title]);
+    }, [dispatch, catToEdit, categoryID, title]);
 
 
     // useEffect for side effect handling
     useEffect(() => {
         props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit });
-    }, [submitHandler]);
+    }, [submitHandler, isEdit]);
 
     return (
         <ScrollView>

@@ -12,13 +12,12 @@ import ClothesList from '../../components/Lists/ClothesList';
  * chosen event, in a list (2nd screen)
  */
 
-
 // TODO: set up redux for clothes at a later point in time
 const EventsClothesScreen = props => {
 
     const eventID = props.navigation.getParam('eventID');
     const selectedEvent = useSelector(state => {
-        return state.events.availableEvents.find(event => event.id = eventID);
+        return state.events.availableEvents.find(event => event.id === eventID);
     }); // don't forget the return in blocks
 
     const editCategoryHandler = useCallback(() => {
@@ -30,20 +29,18 @@ const EventsClothesScreen = props => {
     ); // get clothes from a certain event ID (fix this to use redux) -> create actions and reducers for clothes
 
     // need to set parameters so that nav buttons can access, this is side effect
-    useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, selected: selectedEvent }), [editCategoryHandler, selectedEvent]);
+    useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, selected: selectedEvent.title }), [editCategoryHandler, selectedEvent]);
 
     return <ClothesList emptyData={() => <View><Text>placeholder</Text></View>} listData={clothesToDisplay} navigation={props.navigation} />;
 };
 
 EventsClothesScreen.navigationOptions = navData => {
 
-    const eventID = navData.navigation.getParam('eventID'); // header title is dynamic
     const editEventHandler = navData.navigation.getParam('edit'); // extract handler
-
-    const selectedEvent = EVENTS.find(event => event.id === eventID); // fix this to use redux
+    const selectedTitle = navData.navigation.getParam('selected');
 
     return {
-        headerTitle: selectedEvent.title,
+        headerTitle: selectedTitle,
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item

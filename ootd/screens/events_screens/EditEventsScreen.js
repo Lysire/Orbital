@@ -36,11 +36,9 @@ const EditCategoriesScreen = props => {
             );
         }
         props.navigation.goBack();
-    }, [dispatch, eventID, title]);
+    }, [dispatch, eventToEdit, eventID, title]);
 
-    useEffect(() => {
-        props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit });
-    }, [submitHandler]);
+    useEffect(() => props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit }), [submitHandler, isEdit]);
 
     return (
         <ScrollView>

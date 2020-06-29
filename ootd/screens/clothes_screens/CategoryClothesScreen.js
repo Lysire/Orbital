@@ -16,14 +16,11 @@ import ClothesList from '../../components/Lists/ClothesList';
 const CategoryClothesScreen = props => {
 
   const catID = props.navigation.getParam('categoryID');
-
   const selectedCategory = useSelector(state => { 
     return state.categories.availableCategories.find(cat => cat.id === catID); 
   }); // don't forget the return inside blocks...
 
-  const editCategoryHandler = useCallback(() => { 
-    props.navigation.navigate('EditCategories', { categoryID: catID }); // to edit the categories
-  }, [catID]);
+  const editCategoryHandler = useCallback(() => props.navigation.navigate('EditCategories', { categoryID: catID }), [catID]);
 
   const displayedClothes = CLOTHES.filter(
     clothing => clothing.categoryIDs.indexOf(catID) >= 0

@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 availableCategories: state.availableCategories.filter(
-                    cat => action.IDs.indexOf(cat) < 0
+                    cat => action.IDs.indexOf(cat.id) < 0
                 ),
                 latestCatID: action.IDs.indexOf(state.latestCatID) < 0 ? 'c' + number.toString() : state.latestCatID
             };
