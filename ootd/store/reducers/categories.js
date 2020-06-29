@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             };
         case UPDATE_CATEGORY:
             const catIndex = state.availableCategories.findIndex(cat => cat.id === action.ID);
-            const updatedCategory = new Category(action.catID, action.newTitle, '#851dfb');
+            const updatedCategory = new Category(action.ID, action.newTitle, '#851dfb');
             const updatedCategories = [...state.availableCategories];
             updatedCategories[catIndex] = updatedCategory;
             return {
@@ -30,13 +30,13 @@ export default (state = initialState, action) => {
                 availableCategories: updatedCategories
             };
         case DELETE_CATEGORY:
-            const num = Number.parseInt(state.latestCatID.substr(1), 10) + 100; 
+            const number = Number.parseInt(state.latestCatID.substr(1), 10) + 100; 
             return {
                 ...state,
                 availableCategories: state.availableCategories.filter(
                     cat => action.IDs.indexOf(cat) < 0
                 ),
-                latestCatID: action.IDs.indexOf(latestCatID) < 0 ? 'c' + num.toString() : latestCatID
+                latestCatID: action.IDs.indexOf(state.latestCatID) < 0 ? 'c' + number.toString() : state.latestCatID
             };
     }
     return state;

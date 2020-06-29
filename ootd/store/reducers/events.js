@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 availableEvents: state.availableEvents.concat(newCategory),
-                latestEvID: newID
+                latestEventID: newID
             };
         case UPDATE_EVENT:
             const eventIndex = state.availableEvents.findIndex(cat => cat.id === action.ID);
@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 availableCategories: state.availableCategories.filter(
-                    cat => cat.id !== action.latestCatID
+                    cat => cat.id !== action.latestEventID
                 )
             }
         case DELETE_EVENT:

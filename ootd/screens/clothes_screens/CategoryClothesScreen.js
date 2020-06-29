@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
+import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
 import { CLOTHES } from '../../data/dummy-data';
 import ClothesList from '../../components/Lists/ClothesList';
 
@@ -29,13 +30,12 @@ const CategoryClothesScreen = props => {
   ); // get clothes from a certain category ID (fix this to use redux) -> create actions and reducers for clothes
 
   // need to set parameters so that nav buttons can access, this is side effect
-  useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, categoryTitle: selectedCategory }), [editCategoryHandler, selectedCategory]);
+  useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, categoryTitle: selectedCategory.title }), [editCategoryHandler, selectedCategory]);
 
-  return <ClothesList listData={displayedClothes} navigation={props.navigation} />;
+  return <ClothesList emptyData={() => <View><Text>placeholder</Text></View>} listData={displayedClothes} navigation={props.navigation} />;
 };
 
 CategoryClothesScreen.navigationOptions = navData => {
-
 
   const editCategoryHandler = navData.navigation.getParam('edit'); // extract handler
   const selectedTitle = navData.navigation.getParam('categoryTitle');

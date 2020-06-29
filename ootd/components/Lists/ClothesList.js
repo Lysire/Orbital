@@ -31,6 +31,7 @@ const ClothesList = props => {
     <View style={styles.list}>
       <FlatList
         data={props.listData}
+        ListEmptyComponent={props.emptyData}
         keyExtractor={(item, index) => item.id}
         renderItem={renderClothesItem}
         style={{ width: '100%' }}

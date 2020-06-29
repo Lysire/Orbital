@@ -49,7 +49,7 @@ const CategoriesScreen = props => {
     return (
       <GridTile
         title={itemData.item.title}
-        color={itemData.item.color}
+        color={toDelete.indexOf(itemData.item.id) < 0 ? itemData.item.color: deleteColor}
         onSelect={() => {
           props.navigation.navigate({
             routeName: 'ClothesCategories',
@@ -84,6 +84,7 @@ const CategoriesScreen = props => {
       numColumns={2}
       data={availableCategories}
       renderItem={renderGridItem}
+      extraData={refresh}
     />
   );
 };

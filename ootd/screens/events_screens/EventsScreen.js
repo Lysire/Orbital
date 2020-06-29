@@ -43,10 +43,6 @@ const EventsScreen = props => {
 
   const deleteColor = '#fba21d' // consider moving this to Colors.js
 
-  const addEventHandler = useCallback(() => {
-    props.navigation.navigate('EditEvents', {eventID: ''});
-  }, []);
-
   const renderGriditem = itemData => {
     return (
       <GridTile

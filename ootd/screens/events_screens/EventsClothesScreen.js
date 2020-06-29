@@ -32,10 +32,10 @@ const EventsClothesScreen = props => {
     // need to set parameters so that nav buttons can access, this is side effect
     useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, selected: selectedEvent }), [editCategoryHandler, selectedEvent]);
 
-    return <ClothesList listData={clothesToDisplay} navigation={props.navigation} />;
+    return <ClothesList emptyData={() => <View><Text>placeholder</Text></View>} listData={clothesToDisplay} navigation={props.navigation} />;
 };
 
-CategoryClothesScreen.navigationOptions = navData => {
+EventsClothesScreen.navigationOptions = navData => {
 
     const eventID = navData.navigation.getParam('eventID'); // header title is dynamic
     const editEventHandler = navData.navigation.getParam('edit'); // extract handler

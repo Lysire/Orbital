@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { CLOTHES } from '../../data/dummy-data';
-import LogicHomeButtons from '../../components/Buttons/LogicHomeButtons';
+import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
 
 /*
  * Screen that displays details of the clothing selected
@@ -28,9 +29,15 @@ ClothesDetailScreen.navigationOptions = navData => {
   
   return {
     headerTitle: selectedClothes.title,
-    headerRight: () => (<LogicHomeButtons onAdd={() => { }} onEdit={() => { }}
-      onRemove={() => { }} onSelectHome={() => navData.navigation.popToTop()} />
-    )
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+              title="Home"
+              iconName='home'
+              onPress={() => navData.navigation.popToTop()}
+          />
+      </HeaderButtons>
+  )
   };
 };
 
