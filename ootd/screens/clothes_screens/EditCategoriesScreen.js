@@ -15,12 +15,10 @@ const EditCategoriesScreen = props => {
     const dispatch = useDispatch();
 
     const categoryID = props.navigation.getParam('categoryID'); // get from CategoriesScreen
-    const eventID = props.navigation.getParam('eventID'); // get from EventsScreen
-
-    // falseish value for add if categoryID is not set
-    const catToEdit = useSelector(state =>
-        state.categories.availableCategories.find(cat => cat.id === categoryID)); 
-        
+    // falseish value for add if categoryID is not set ('')
+    const catToEdit = useSelector(state => {
+        return state.categories.availableCategories.find(cat => cat.id === categoryID); 
+    });
     const isEdit = catToEdit ? true : false; 
     const [title, setTitle] = useState(catToEdit ? catToEdit.title : '');
 
@@ -39,6 +37,8 @@ const EditCategoriesScreen = props => {
         props.navigation.goBack();
     }, [dispatch, categoryID, title]);
 
+
+    // useEffect for side effect handling
     useEffect(() => {
         props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit });
     }, [submitHandler]);
@@ -66,7 +66,8 @@ EditCategoriesScreen.navigationOptions = navData => {
         headerTitle: isEdit
             ? 'Edit Category'
             : 'Add Category',
-        headerRight: (
+
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title="Save"

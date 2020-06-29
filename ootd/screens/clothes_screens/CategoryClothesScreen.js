@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
+import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { CATEGORIES, CLOTHES } from '../../data/dummy-data';
+import { CLOTHES } from '../../data/dummy-data';
 import ClothesList from '../../components/Lists/ClothesList';
 
 /*
@@ -10,41 +11,43 @@ import ClothesList from '../../components/Lists/ClothesList';
  * chosen category, in a list (2nd screen)
  */
 
-// TODO: set up store for clothes (actions and reducers), refactor 
-
+// TODO: set-up redux for clothes at a later point in time
 const CategoryClothesScreen = props => {
 
   const catID = props.navigation.getParam('categoryID');
 
-  const editCategoryHandler = useCallback(id => {
-    props.navigation.navigate('EditCategories', { categoryID: id });
-  }, [id]); // to edit the categories
+  const selectedCategory = useSelector(state => { 
+    return state.categories.availableCategories.find(cat => cat.id === catID); 
+  }); // don't forget the return inside blocks...
+
+  const editCategoryHandler = useCallback(() => { 
+    props.navigation.navigate('EditCategories', { categoryID: catID }); // to edit the categories
+  }, [catID]);
 
   const displayedClothes = CLOTHES.filter(
     clothing => clothing.categoryIDs.indexOf(catID) >= 0
   ); // get clothes from a certain category ID (fix this to use redux) -> create actions and reducers for clothes
 
   // need to set parameters so that nav buttons can access, this is side effect
-  useEffect(() => props.navigation.setParams({ edit: editCategoryHandler }), [editCategoryHandler]);
+  useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, categoryTitle: selectedCategory }), [editCategoryHandler, selectedCategory]);
 
   return <ClothesList listData={displayedClothes} navigation={props.navigation} />;
 };
 
 CategoryClothesScreen.navigationOptions = navData => {
 
-  const catID = navData.navigation.getParam('categoryID'); // header title is dynamic
-  const onEdit = navData.navigation.getParam('edit'); // extract handler
 
-  const selectedCategory = CATEGORIES.find(cat => cat.id === catID); // fix this to use redux
+  const editCategoryHandler = navData.navigation.getParam('edit'); // extract handler
+  const selectedTitle = navData.navigation.getParam('categoryTitle');
 
   return {
-    headerTitle: selectedCategory.title,
+    headerTitle: selectedTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Edit"
           iconName="pencil"
-          onPress={() => onEdit(catID)}
+          onPress={editCategoryHandler}
         />
         <Item
           title="Home"

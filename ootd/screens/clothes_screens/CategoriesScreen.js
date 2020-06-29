@@ -20,25 +20,30 @@ const CategoriesScreen = props => {
   // accesses store, obtains the reducer through state.categories, then gets the availableCategories
   const availableCategories = useSelector(state => state.categories.availableCategories);
   const dispatch = useDispatch();
-  const [IDs, setIDs] = useState([]); // maintains IDs marked for deletion
+  const [toDelete, setToDelete] = useState([]); // maintains IDs marked for deletion
+  const [refresh, setRefresh] = useState(false); // to cause the flatlist to re-render
+
 
   const addCategoryHandler = useCallback(() => {
     props.navigation.navigate('EditCategories', { categoryID: '' });
   }, []);
 
-  const deleteHandler = useCallback(IDs => {
+
+  const deleteHandler = useCallback(() => {
     Alert.alert('Are you sure?', 'Do you really want to delete?', [
       { text: 'No', style: 'default' },
       {
         text: 'Yes',
         style: 'destructive',
         onPress: () => {
-          dispatch(categoriesActions.deleteCategory(IDs));
-          setIDs([]); // reset the array 
+          dispatch(categoriesActions.deleteCategory(toDelete));
+          setToDelete([]);
         }
       }
     ]);
-  }, [dispatch, IDs]);
+  }, [dispatch, toDelete]); // toDelete is also a dependency -.-||
+
+  const deleteColor = '#fba21d'; // can change this later
 
   const renderGridItem = itemData => {
     return (
@@ -53,7 +58,17 @@ const CategoriesScreen = props => {
             }
           });
         }}
-        onLongSelect={() => setIDs(prev => [...prev, itemData.item.id])} // update the state array
+        onLongSelect={() => {
+          if (toDelete.indexOf(itemData.item.id) < 0) { // id is not inside
+            setToDelete(prev => [...prev, itemData.item.id]);
+            console.log(toDelete);
+            setRefresh(state => !state);
+          } else { // id is inside, remove the id
+            setToDelete(prev => prev.filter(item => item.id === itemData.item.id));
+            console.log(toDelete);
+            setRefresh(state => !state);
+          }
+        }}
       />
     );
   };
@@ -61,7 +76,7 @@ const CategoriesScreen = props => {
   // set parameters here
   useEffect(() => {
     props.navigation.setParams({ add: addCategoryHandler, delete: deleteHandler });
-  }, [addCategoryHandler]);
+  }, [addCategoryHandler, deleteHandler]);
 
   return (
     <FlatList
@@ -76,7 +91,7 @@ const CategoriesScreen = props => {
 CategoriesScreen.navigationOptions = navData => {
   const addEventHandler = navData.navigation.getParam('add');
   const deleteEventHandler = navData.navigation.getParam('delete');
-  
+
   return {
     headerTitle: 'Categories',
     headerLeft: () => (

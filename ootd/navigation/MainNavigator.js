@@ -10,6 +10,7 @@ import EditCategoriesScreen from '../screens/clothes_screens/EditCategoriesScree
 
 import EventsScreen from '../screens/events_screens/EventsScreen';
 import EventsClothesScreen from '../screens/events_screens/EventsClothesScreen';
+import EditEventsScreen from '../screens/events_screens/EditEventsScreen';
 
 // default stack navigation options
 const defaultStackNavOptions = {

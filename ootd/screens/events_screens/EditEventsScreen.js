@@ -18,8 +18,8 @@ const EditCategoriesScreen = props => {
 
     // falseish value for add if eventID is not set
     const eventToEdit = useSelector(state =>
-        state.events.availableEvents.find(event => event.id === eventsID)); 
-        
+        state.events.availableEvents.find(event => event.id === eventID)); 
+    
     const isEdit = eventToEdit ? true : false; 
     const [title, setTitle] = useState(eventToEdit ? eventToEdit.title : '');
 
@@ -65,7 +65,8 @@ EditCategoriesScreen.navigationOptions = navData => {
         headerTitle: isEdit
             ? 'Edit Event'
             : 'Add Event',
-        headerRight: (
+
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title="Save"
