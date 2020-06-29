@@ -27,7 +27,9 @@ const CategoryClothesScreen = props => {
   ); // get clothes from a certain category ID (fix this to use redux) -> create actions and reducers for clothes
 
   // need to set parameters so that nav buttons can access, this is side effect
-  useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, categoryTitle: selectedCategory.title }), [editCategoryHandler, selectedCategory]);
+  useEffect(() => {
+    props.navigation.setParams({ edit: editCategoryHandler, categoryTitle: selectedCategory.title });
+  }, [editCategoryHandler, selectedCategory]);
 
   return <ClothesList emptyData={() => <View><Text>placeholder</Text></View>} listData={displayedClothes} navigation={props.navigation} />;
 };

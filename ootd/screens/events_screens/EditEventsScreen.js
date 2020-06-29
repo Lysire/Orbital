@@ -38,7 +38,9 @@ const EditCategoriesScreen = props => {
         props.navigation.goBack();
     }, [dispatch, eventToEdit, eventID, title]);
 
-    useEffect(() => props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit }), [submitHandler, isEdit]);
+    useEffect(() => { 
+        props.navigation.setParams({ onSubmit: submitHandler, edit: isEdit });
+    }, [submitHandler, isEdit]);
 
     return (
         <ScrollView>
@@ -58,7 +60,7 @@ const EditCategoriesScreen = props => {
 
 EditCategoriesScreen.navigationOptions = navData => {
     const submitFunction = navData.navigation.getParam('onSubmit');
-    const isEdit = navData.navigation.getParam('isEdit');
+    const isEdit = navData.navigation.getParam('edit');
     return {
         headerTitle: isEdit
             ? 'Edit Event'

@@ -40,7 +40,7 @@ const EditCategoriesScreen = props => {
 
     // useEffect for side effect handling
     useEffect(() => {
-        props.navigation.setParams({ onSubmit: submitHandler, isEdit: isEdit });
+        props.navigation.setParams({ onSubmit: submitHandler, edit: isEdit });
     }, [submitHandler, isEdit]);
 
     return (
@@ -61,7 +61,7 @@ const EditCategoriesScreen = props => {
 
 EditCategoriesScreen.navigationOptions = navData => {
     const submitFunction = navData.navigation.getParam('onSubmit');
-    const isEdit = navData.navigation.getParam('isEdit');
+    const isEdit = navData.navigation.getParam('edit');
     return {
         headerTitle: isEdit
             ? 'Edit Category'

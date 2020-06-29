@@ -29,7 +29,9 @@ const EventsClothesScreen = props => {
     ); // get clothes from a certain event ID (fix this to use redux) -> create actions and reducers for clothes
 
     // need to set parameters so that nav buttons can access, this is side effect
-    useEffect(() => props.navigation.setParams({ edit: editCategoryHandler, selected: selectedEvent.title }), [editCategoryHandler, selectedEvent]);
+    useEffect(() => { 
+        props.navigation.setParams({ edit: editCategoryHandler, selected: selectedEvent.title });
+    }, [editCategoryHandler, selectedEvent]); // put the setParams in a body to prevent it from returning true
 
     return <ClothesList emptyData={() => <View><Text>placeholder</Text></View>} listData={clothesToDisplay} navigation={props.navigation} />;
 };
