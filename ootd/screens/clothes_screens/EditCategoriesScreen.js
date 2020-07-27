@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { View, ScrollView, Text, TextInput, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
+import { FirebaseContext } from '../../firebase';
 
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
 import * as categoriesActions from '../../store/actions/categories';
@@ -12,6 +13,7 @@ import * as categoriesActions from '../../store/actions/categories';
  */
 
 const EditCategoriesScreen = props => {
+    const firebase = useContext(FirebaseContext)
     const dispatch = useDispatch();
 
     const categoryID = props.navigation.getParam('categoryID'); // get from CategoriesScreen
@@ -26,10 +28,17 @@ const EditCategoriesScreen = props => {
 
     const submitHandler = useCallback(() => {
         if (catToEdit) {
+            firebase.category(categoryID).update({title: title})
             dispatch(
                 categoriesActions.updateCategory(categoryID, title)
             );
         } else {
+            const newID = '_' + Math.random().toString(36).substr(2, 9); // UGLY HAX
+            firebase.categoriesList().child(newID).set({
+                id: newID,
+                title: title,
+                color: "851dfb"
+            })
             dispatch(
                 categoriesActions.createCategory(title)
             );
