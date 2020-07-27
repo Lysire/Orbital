@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
+    "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",
+    "firebase": "^7.17.1",
     "logkitty": "^0.7.1",
     "mem": "^6.1.0",
     "react": "~16.9.0",
