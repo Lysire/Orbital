@@ -23,7 +23,7 @@ class Firebase {
     this.clothes = id => this.db.ref(`clothes/${id}`);
     this.clothesList = () => this.db.ref('clothes');
 
-    this.events = id => this.db.ref(`events/${id}`);
+    this.event = id => this.db.ref(`events/${id}`);
     this.eventsList = () => this.db.ref('events');
   }
 }
