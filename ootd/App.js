@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import categoriesReducer from './store/reducers/categories';
 import eventsReducer from './store/reducers/events';
 import MainNavigator from './navigation/MainNavigator';
+import Firebase, { FirebaseContext } from './firebase';
 
 enableScreens(); // to enable react-native-screens for navigation (stack)
 
@@ -41,9 +42,11 @@ export default function App() {
 
   return ( // remember to set the store for the provider wrapper
     <Provider store={store}>
-      <OverflowMenuProvider>
-        <MainNavigator />
-      </OverflowMenuProvider>
+      <FirebaseContext.Provider value={new Firebase()}>
+        <OverflowMenuProvider>
+          <MainNavigator />
+        </OverflowMenuProvider>
+      </FirebaseContext.Provider>
     </Provider>
   );
 }

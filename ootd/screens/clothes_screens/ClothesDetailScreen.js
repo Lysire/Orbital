@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect, useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import { CLOTHES } from '../../data/dummy-data';
 import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
+import { FirebaseContext } from '../../firebase';
+import Clothes from '../../classes/clothes';
 
 /*
  * Screen that displays details of the clothing selected
@@ -11,24 +12,40 @@ import CustomHeaderButton from '../../components/Buttons/CustomHeaderButton';
  */
 
 const ClothesDetailScreen = props => {
+  const firebase = useContext(FirebaseContext)
+  const [selectedClothes, setSelectedClothes] = useState(null) 
   const clothesID = props.navigation.getParam('clothesID');
-  const selectedClothes = CLOTHES.find(clothing => clothing.id === clothesID); // TODO: use redux instead of dummy data
+  
+  useEffect(() => {
+    firebase.clothes(clothesID).on("value", function(snapshot) {
+      const clothesObject = snapshot.val()
+      const clothesInstance = Clothes.fromObject(clothesObject)
+      if (selectedClothes == null) {
+        setSelectedClothes(clothesInstance)
+        props.navigation.setParams({
+          clothesTitle: clothesInstance.title,
+        })
+      }
+    }, function (errorObject) {
+      console.log("Firebase read failed: " + errorObject.code);
+    });
+  }, [selectedClothes])
+
 
   // TODO: beautify this
   return (
     <View style={styles.screen}>
-      <Text>{selectedClothes.title}</Text>
+      <Text>{selectedClothes ? selectedClothes.title : "Loading..."}</Text>
     </View>
   );
 };
 
 // navigator options for the current screen
 ClothesDetailScreen.navigationOptions = navData => {
-  const clothesID = navData.navigation.getParam('clothesID');   // since headerTitle is dynamic, need to use a parameter to update
-  const selectedClothes = CLOTHES.find(clothing => clothing.id === clothesID);
-  
+  const clothesTitle = navData.navigation.getParam('clothesTitle');   // since headerTitle is dynamic, need to use a parameter to update
+
   return {
-    headerTitle: selectedClothes.title,
+    headerTitle: clothesTitle,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
