@@ -1,4 +1,5 @@
 import app from 'firebase/app';
+import 'firebase/database';
 import React from 'react';
  
 const firebaseConfig = {
@@ -14,11 +15,20 @@ const firebaseConfig = {
  
 class Firebase {
   constructor() {
-    app.initializeApp(config);
+    app.initializeApp(firebaseConfig);
+    this.db = app.database();
+    this.category = id => this.db.ref(`categories/${id}`);
+    this.categoriesList = () => this.db.ref('categories');
+
+    this.clothes = id => this.db.ref(`clothes/${id}`);
+    this.clothesList = () => this.db.ref('clothes');
+
+    this.events = id => this.db.ref(`events/${id}`);
+    this.eventsList = () => this.db.ref('events');
   }
 }
 
 const FirebaseContext = React.createContext(null);
- 
+
 export { FirebaseContext };
 export default Firebase;
