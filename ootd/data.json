@@ -1,85 +1,99 @@
 {
-    "events": [
-        {
-            "id": "e1", 
-            "title": "Formal", 
-            "color": "#fb1d93"
-        }
-    ],
-
-    "categories": [
-        {
-            "id": "c1", 
-            "title": "T-shirts", 
-            "color": "#851dfb"
-        },
-        {
-            "id": "c2", 
-            "title": "Bottoms", 
-            "color": "#851dfb"
-        },
-        {
-            "id": "c3", 
-            "title": "Socks", 
-            "color": "#851dfb"
-        },
-        {
-            "id": "c4", 
-            "title": "Accessories", 
-            "color": "#851dfb"
-        }
-    ],
-
-    "clothes": [
-        {
-            "id": "m1",
-            "categoryIDs": ["c1"],
-            "eventIDs": ["e1"],
-            "title": "Navy-blue shirt",
-            "imageURL": "https://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg",
-            "size": "s",
-            "desc": "plain"
-        },
-
-        {
-            "id": "m2",
-            "categoryIDs": ["c3"],
-            "eventIDs": ["e1"],
-            "title": "Wool Grey socks",
-            "imageURL": "https://cdn.pixabay.com/photo/2016/01/23/14/56/socks-1157528_960_720.jpg",
-            "size": "m",
-            "desc": "plain"
-        },
-
-        {
-            "id": "m3",
-            "categoryIDs": ["c1"],
-            "eventIDs": ["e2"],
-            "title": "navy blue shirt",
-            "imageURL": "https://cdn.pixabay.com/photo/2016/02/07/14/59/shirts-1184914_960_720.jpg",
-            "size": "m",
-            "desc": "denim"
-        },
-
-        {
-            "id": "m4",
-            "categoryIDs": ["c4"],
-            "eventIDs": ["e2"],
-            "title": "scarf",
-            "imageURL": "https://cdn.pixabay.com/photo/2018/01/30/12/08/scarf-3118634_960_720.jpg",
-            "size": "l",
-            "desc": "checkered"
-        },
-
-        {
-            "id": "m5", 
-            "categoryIDs": ["c2"], 
-            "eventIDs": ["e2"], 
-            "title": "Dark blue trousers", 
-            "imageURL": "https://cdn.pixabay.com/photo/2017/08/27/05/33/trousers-2685231_960_720.jpg", 
-            "size": "l", 
-            "desc": "plain" 
-        }
-
-    ]
-}
+    "clotdhes": [],
+    "categories": {
+      "c1": {
+        "color": "#851dfb",
+        "id": "c1",
+        "title": "T-shirts"
+      },
+      "c2": {
+        "color": "#851dfb",
+        "id": "c2",
+        "title": "Bottoms"
+      },
+      "c3": {
+        "color": "#851dfb",
+        "id": "c3",
+        "title": "Socks"
+      },
+      "c4": {
+        "color": "#851dfb",
+        "id": "c4",
+        "title": "Accessories"
+      }
+    },
+    "events": {
+      "e1": {
+        "color": "#fb1d93",
+        "id": "e1",
+        "title": "Formal"
+      }
+    },
+    "clothes": {
+      "m1": {
+        "categoryIDs": [
+          "c1"
+        ],
+        "desc": "plain",
+        "eventIDs": [
+          "e1"
+        ],
+        "id": "m1",
+        "imageURL": "https://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg",
+        "size": "s",
+        "title": "Navy-blue shirt"
+      },
+      "m2": {
+        "categoryIDs": [
+          "c3"
+        ],
+        "desc": "plain",
+        "eventIDs": [
+          "e1"
+        ],
+        "id": "m2",
+        "imageURL": "https://cdn.pixabay.com/photo/2016/01/23/14/56/socks-1157528_960_720.jpg",
+        "size": "m",
+        "title": "Wool Grey socks"
+      },
+      "m3": {
+        "categoryIDs": [
+          "c1"
+        ],
+        "desc": "denim",
+        "eventIDs": [
+          "e2"
+        ],
+        "id": "m3",
+        "imageURL": "https://cdn.pixabay.com/photo/2016/02/07/14/59/shirts-1184914_960_720.jpg",
+        "size": "m",
+        "title": "navy blue shirt"
+      },
+      "m4": {
+        "categoryIDs": [
+          "c4"
+        ],
+        "desc": "checkered",
+        "eventIDs": [
+          "e2"
+        ],
+        "id": "m4",
+        "imageURL": "https://cdn.pixabay.com/photo/2018/01/30/12/08/scarf-3118634_960_720.jpg",
+        "size": "l",
+        "title": "scarf"
+      },
+      "m5": {
+        "categoryIDs": [
+          "c2"
+        ],
+        "desc": "plain",
+        "eventIDs": [
+          "e2"
+        ],
+        "id": "m5",
+        "imageURL": "https://cdn.pixabay.com/photo/2017/08/27/05/33/trousers-2685231_960_720.jpg",
+        "size": "l",
+        "title": "Dark blue trousers"
+      }
+    }
+  }
