@@ -11,8 +11,7 @@
  */  
 
 class Clothes {
-  constructor(id, categoryIDs, eventIDs, title, imageURL, size, desc) 
-  {
+  constructor(id, categoryIDs, eventIDs, title, imageURL, size, desc) {
     this.id = id;
     this.categoryIDs = categoryIDs;
     this.eventIDs = eventIDs;
@@ -21,6 +20,17 @@ class Clothes {
     this.size = size;
     this.desc = desc;
   }
+
+  static fromObject = (obj) => {
+    return new Clothes(obj["id"],
+                    obj["categoryIDs"],
+                    obj["eventIDs"],
+                    obj["title"],
+                    obj["imageURL"],
+                    obj["size"],
+                    obj["desc"])
+  }
+  
 }
 
 export default Clothes;

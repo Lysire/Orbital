@@ -13,6 +13,11 @@ class Category {
     this.title = title;
     this.color = color; // to replace this with images if need be
   }
+
+  static fromObject(obj) {
+    return new Category(obj["id"], obj["title"], obj["color"])
+  }
+  
 }
 
 export default Category;
